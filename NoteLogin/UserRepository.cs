@@ -46,7 +46,7 @@ namespace NoteLogin
         }
 
 
-        public static bool VerificarLogin(string username, string senha)
+        public static int VerificarLogin(string username, string senha)
         {
             using (var conexao = DataBase.ConexaoBanco())
             {
@@ -57,9 +57,15 @@ namespace NoteLogin
                     comando.Parameters.AddWithValue("@username", username);
                     comando.Parameters.AddWithValue("@senha", senha);
 
-                    long resultado = (long)comando.ExecuteScalar();
+                    object resultado = (object)comando.ExecuteScalar();
 
-                    return resultado > 0;
+                    if (resultado != null && resultado != DBNull.Value)
+                    {
+                        return Convert.ToInt32(resultado);
+                    }
+                    else
+
+                    return 0;
                 }
             }
         }
@@ -80,5 +86,6 @@ namespace NoteLogin
 
 
         }
+
     }
 }

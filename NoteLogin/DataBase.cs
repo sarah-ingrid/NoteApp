@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SQLite;
 
+
 namespace NoteLogin
 {
     internal class DataBase
@@ -22,6 +23,8 @@ namespace NoteLogin
             conexao.Open();
             return conexao;
         }
+
+
 
         
     }

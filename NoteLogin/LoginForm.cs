@@ -14,14 +14,19 @@ namespace NoteLogin
 
         private void enter_button_Click(object sender, EventArgs e)
         {
-            bool loginValido = UserRepository.VerificarLogin(login_box.Text, password_box.Text);
+            int loginValido = UserRepository.VerificarLogin(login_box.Text, password_box.Text);
             try
             {
-                if (loginValido)
+                if (loginValido != 0)
                 {
+                    /*    var noteApp = new NoteApp();
+                        noteApp.Show();
+                        this.Hide();*/
+
                     var noteApp = new NoteApp();
-                    noteApp.Show();
                     this.Hide();
+                    noteApp.ShowDialog();
+                    this.Show();
                 }
                 else
                 {

@@ -1,0 +1,77 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace NoteLogin
+{
+    public partial class CreateNote : UserControl
+    {
+        public event Action NotaSalva;//
+
+        public CreateNote()
+        {
+            InitializeComponent();
+
+        }
+
+
+
+        private void saveNote_button_Click(object sender, EventArgs e)
+        {
+            string notaTitulo = noteTitleText.Text;
+            string nota = NoteText_richTbox.Text;
+
+
+            try
+            {
+                if (string.IsNullOrWhiteSpace(notaTitulo))
+                {
+                    notaTitulo = "Sem Título"; // MUDAR PARA O TITULO SER OS PRIMEIROS CARACTERES DO TEXTO
+                }
+
+                if (string.IsNullOrEmpty(nota))
+                {
+                    MessageBox.Show("Nota não pode ser vazia!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+                else { 
+                Note novaNota = new Note()
+                {
+                    ID_user = 1,
+                    Title = notaTitulo,
+                    Text = nota,
+                    IsImportant = false,
+                    CreateAt = DateTime.Now,
+                    UpdateAt = DateTime.Now
+                };
+
+                    NoteRepository.CriarNota(novaNota);
+
+                    MessageBox.Show("Nota salva com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    noteTitleText.Clear();
+                    NoteText_richTbox.Clear();
+                }
+                
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao salvar a nota" + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+        }
+
+        private void closeX_Click(object sender, EventArgs e)
+        {
+            NotaSalva?.Invoke(); // invocando o evento
+        }
+    }
+}
