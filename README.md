@@ -23,17 +23,26 @@ O projeto está sendo feito no Visual Studio em linguagem C#.
 ![loginn](https://github.com/user-attachments/assets/1a0b5066-c026-492d-8ec5-500ff00f10f9)
 ![cadastro](https://github.com/user-attachments/assets/58cb5639-b9d9-43b3-9054-2d74d1796cd5) <br/> <br/>
 ✅ Validação de login (verifica se o usuário existe no banco) e o cadastro salva os dados diretamente no banco de dados <br/>
-✅ Interface do aplicativo de bloco de notas com um menu deslizante, para uma boa experiência de navegação para o usuário <br/> 
-![hhh (3)](https://github.com/user-attachments/assets/5e71c1fd-afd7-45e9-b862-13a7481dbaf9)
+✅ Notas e tarefas do usuário são armazenadas no banco de dados e exibidas quando ele acessa a opção correspondente no menu   <br/>
+✅ Melhoria da Interface do aplicativo bloco de notas: 
+* Bordas do Form arredondadas
+* Menu deslizante
+* Funcionalidade de seleção de tema pelo usuário
+  <br/> 
 
+---
+## Video de demonstração:
+https://github.com/user-attachments/assets/41f78e80-f5f7-46a5-b7fe-11ddb3f816ef
+
+---
 <!-- resolução GIF 700 ou 800 -->
+<br/> <br/>
 
-
-
-✅ Tratamento de erro <br/> <br/>
 
 ## O que ainda será feito:
-⭕ Funcionamento das opções no menu do aplicativo <br/>
+⭕ Melhoria na interface das telas Login e Cadastro <br/>
 ⭕ Customização que o usuário pode fazer ao criar uma nota ou checklist <br/>
-⭕ Implementação completa de CRUD (Criar, Ler, Atualizar, Deletar) para Notas e Tarefas, com armazenamento no banco de dados, mantendo a relação com o usuário logado. <br/>
+⭕ Implementar as funcionalidades de Atualizar e Deletar para notas e tarefas, mantendo a relação com o usuário logado. <br/>
+⭕ Desenvolver as funcionalidades pendentes das opções restantes no menu (Aba de "Importantes" e relacionados ao Perfil) <br/>
+⭕ Incluir a opção do usuário escolher sua foto de perfil <br/>
 ⭕ Com projeto pronto, gerar um .exe portátil para facilitar o uso sem necessidade de instalar dependências <br/>
