@@ -6,11 +6,13 @@ using System.Data.SQLite;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace NoteLogin
@@ -56,10 +58,17 @@ namespace NoteLogin
         }
 
 
-        public NoteApp()
+  
+
+        private int UserID;
+        bool IsImportant;
+        public NoteApp(int UserID)
         {
             InitializeComponent();
 
+            this.UserID = UserID;
+
+   
             // this.FormBorderStyle = FormBorderStyle.None;
             // this.Padding = new Padding(borderSize);
             //   this.panelTitleBar.BackColor = borderColor;
@@ -68,42 +77,73 @@ namespace NoteLogin
             FormsBorder.EnabbleDrag(this.borderStylePanel, this);
         }
 
-        private void NoteApp_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CarregarItensNoPainel<T>(string tabela, Func<SQLiteDataReader, T> criarControle) where T : UserControl
+        private void CarregarItensNoPainel<T>(int UserID, string tabela, bool somenteImportantes,
+            Func<SQLiteDataReader, T> criarControle, bool temImportancia = false) where T : UserControl
         {
             Panel_Principal.Controls.Clear();
 
             using (var conexao = DataBase.ConexaoBanco())
             {
-                string query = $"SELECT TITULO, TEXTO FROM {tabela}"; // WHERE ID_Users = @user
+                string query = "SELECT ID_note, TITULO, TEXTO";
+
+                if (temImportancia)
+                    query += ", IsImportant";
+
+                query += $" FROM {tabela} WHERE ID_Users = @id";
+
+                if (somenteImportantes)
+                    query += " AND IsImportant = 1"; 
+                
 
                 using (var comando = new SQLiteCommand(query, conexao))
                 {
+                    comando.Parameters.AddWithValue("@id", UserID);
+
                     using (var reader = comando.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             T item = criarControle(reader);
-                            Panel_Principal.Controls.Add(item);
 
+
+
+                            Panel_Principal.Controls.Add(item);
                         }
                     }
                 }
             }
         }
 
+   /*     public bool VerificarSeImportante(int IDUser)
+        {
+            using (var conexao = DataBase.ConexaoBanco())
+            {
+                string query = $"SELECT ID_note FROM tb_notes WHERE ID_Users = {IDUser} AND IsImportant = 1";
 
+                using (var comando = new SQLiteCommand(query, conexao))
+                {
+                    comando.Parameters.AddWithValue("@ID_Users", IDUser);
+
+                    object resposta = comando.ExecuteScalar();
+                    if (resposta != null && resposta != DBNull.Value)
+                    {
+                        return resposta;
+                    }
+                    else
+
+                        return 0;
+                }
+            }
+        }*/
 
         private void timerSidebar_Tick(object sender, EventArgs e)
         {
             if (sidebarOpen)
             {
                 Sidebar.Width -= 10;
-                if (Sidebar.Width <= Sidebar.MinimumSize.Width)
+                Panel_Principal.Width += 10;
+                Panel_Principal.Location = new Point(Panel_Principal.Location.X - 10, Panel_Principal.Location.Y);
+                if (Sidebar.Width <= Sidebar.MinimumSize.Width || Panel_Principal.Width >= Panel_Principal.MaximumSize.Width)
                 {
                     sidebarOpen = false;
                     timerSidebar.Stop();
@@ -112,6 +152,9 @@ namespace NoteLogin
             else
             {
                 Sidebar.Width += 10;
+                Panel_Principal.Width -= 10;
+                Panel_Principal.Location = new Point(Panel_Principal.Location.X + 10, Panel_Principal.Location.Y);
+
                 if (Sidebar.Width >= Sidebar.MaximumSize.Width)
                 {
                     sidebarOpen = true;
@@ -124,11 +167,6 @@ namespace NoteLogin
         private void menu_box_Click(object sender, EventArgs e)
         {
             timerSidebar.Start();
-        }
-
-        private void user_welcome_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void opcaoSair_Click(object sender, EventArgs e)
@@ -166,7 +204,7 @@ namespace NoteLogin
             }
             else
             {
-                CreateNote criarNovaNota = new CreateNote();
+                CreateNote criarNovaNota = new CreateNote(UserID);
                 ShowUserControl(criarNovaNota);
             }
         }
@@ -179,7 +217,7 @@ namespace NoteLogin
             }
             else
             {
-                CreateTasks criarNovaTarefa = new CreateTasks();
+                CreateTasks criarNovaTarefa = new CreateTasks(UserID);
                 ShowUserControl(criarNovaTarefa);
             }
         }
@@ -206,16 +244,21 @@ namespace NoteLogin
             }
             else
                 CarregarItensNoPainel<NoteView>(
+                    UserID,
                     "tb_notes",
+                    false,
                     reader =>
                     {
                         var note = new NoteView();
-                        note.Title = reader.GetString(0);
-                        note.Message = reader.GetString(1);
+                        note.IDNote = reader.GetInt32(0);
+                        note.Title = reader.GetString(1);
+                        note.Message = reader.GetString(2);
+                        note.Important = reader.GetBoolean(3);
+                        note.UpdateStarImage();
                         return note;
-                    }
+                    },
+                    temImportancia: true
                 );
-
         }
 
         private void tasks_button_Click(object sender, EventArgs e)
@@ -226,15 +269,42 @@ namespace NoteLogin
             }
             else
                 CarregarItensNoPainel<TasksView>(
+                    UserID,
                     "tb_tasks",
+                    false,
                     reader =>
                     {
                         var task = new TasksView();
                         task.Message = reader.GetString(1);
                         return task;
-                    }
+                    },
+                    temImportancia: false
                 );
+        }
 
+        private void importants_button_Click(object sender, EventArgs e)
+        {
+            if (Panel_Principal.Controls.Count > 0)
+            {
+                Panel_Principal.Controls.Clear();
+            }
+            else
+                CarregarItensNoPainel<NoteView>(
+                    UserID,
+                    "tb_notes",
+                    true,
+                    reader =>
+                    {
+                        var note = new NoteView();
+                        note.IDNote = reader.GetInt32(0);
+                        note.Title = reader.GetString(1);
+                        note.Message = reader.GetString(2);
+                        note.Important = reader.GetBoolean(3);
+                        note.UpdateStarImage();
+                        return note;
+                    },
+                    temImportancia: true
+                );
         }
 
         private void settings_timer_Tick(object sender, EventArgs e)
@@ -353,6 +423,7 @@ namespace NoteLogin
         {
             this.WindowState = FormWindowState.Minimized;
         }
+
 
 
         // criando a permissão para MINIMIZAR (pq tirei essa permissão mandando border.none)

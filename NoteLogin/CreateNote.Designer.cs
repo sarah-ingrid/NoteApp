@@ -33,12 +33,14 @@
             NoteText_richTbox = new RichTextBox();
             noteTitleText = new TextBox();
             closeX = new PictureBox();
+            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)closeX).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // saveNote_button
             // 
-            saveNote_button.Location = new Point(489, 375);
+            saveNote_button.Location = new Point(335, 460);
             saveNote_button.Name = "saveNote_button";
             saveNote_button.Size = new Size(94, 29);
             saveNote_button.TabIndex = 0;
@@ -49,23 +51,23 @@
             // NoteText_richTbox
             // 
             NoteText_richTbox.Cursor = Cursors.IBeam;
-            NoteText_richTbox.Location = new Point(26, 59);
+            NoteText_richTbox.Location = new Point(17, 74);
             NoteText_richTbox.Name = "NoteText_richTbox";
-            NoteText_richTbox.Size = new Size(517, 277);
+            NoteText_richTbox.Size = new Size(366, 354);
             NoteText_richTbox.TabIndex = 1;
             NoteText_richTbox.Text = "";
             // 
             // noteTitleText
             // 
-            noteTitleText.Location = new Point(26, 26);
+            noteTitleText.Location = new Point(17, 26);
             noteTitleText.Name = "noteTitleText";
-            noteTitleText.Size = new Size(217, 27);
+            noteTitleText.Size = new Size(294, 27);
             noteTitleText.TabIndex = 2;
             // 
             // closeX
             // 
             closeX.Image = (Image)resources.GetObject("closeX.Image");
-            closeX.Location = new Point(636, 3);
+            closeX.Location = new Point(518, 3);
             closeX.Name = "closeX";
             closeX.Size = new Size(38, 35);
             closeX.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -73,23 +75,32 @@
             closeX.TabStop = false;
             closeX.Click += closeX_Click;
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.WhiteSmoke;
+            panel1.Controls.Add(NoteText_richTbox);
+            panel1.Controls.Add(noteTitleText);
+            panel1.Controls.Add(closeX);
+            panel1.Controls.Add(saveNote_button);
+            panel1.Location = new Point(250, 3);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(471, 518);
+            panel1.TabIndex = 4;
+            // 
             // CreateNote
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Transparent;
-            BackgroundImage = Properties.Resources._4fb735450ccd37f844681e08fbaca7f8;
             BackgroundImageLayout = ImageLayout.Stretch;
-            Controls.Add(closeX);
-            Controls.Add(noteTitleText);
-            Controls.Add(NoteText_richTbox);
-            Controls.Add(saveNote_button);
+            Controls.Add(panel1);
             DoubleBuffered = true;
             Name = "CreateNote";
-            Size = new Size(685, 490);
+            Size = new Size(721, 603);
             ((System.ComponentModel.ISupportInitialize)closeX).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -99,5 +110,6 @@
         private RichTextBox NoteText_richTbox;
         private TextBox noteTitleText;
         private PictureBox closeX;
+        private Panel panel1;
     }
 }

@@ -50,14 +50,14 @@ namespace NoteLogin
         {
             using (var conexao = DataBase.ConexaoBanco())
             {
-                string query = "SELECT COUNT(*) FROM tb_users WHERE T_username = @username AND T_SENHA = @senha";
+                string query = "SELECT User_ID FROM tb_users WHERE T_username = @username AND T_SENHA = @senha LIMIT 1";
 
                 using (var comando = new SQLiteCommand(query, conexao))
                 {
                     comando.Parameters.AddWithValue("@username", username);
                     comando.Parameters.AddWithValue("@senha", senha);
 
-                    object resultado = (object)comando.ExecuteScalar();
+                    object resultado = comando.ExecuteScalar();
 
                     if (resultado != null && resultado != DBNull.Value)
                     {

@@ -109,7 +109,7 @@
             Sidebar.Controls.Add(settingsContainer);
             Sidebar.Location = new Point(-8, 23);
             Sidebar.MaximumSize = new Size(278, 873);
-            Sidebar.MinimumSize = new Size(93, 873);
+            Sidebar.MinimumSize = new Size(90, 873);
             Sidebar.Name = "Sidebar";
             Sidebar.Size = new Size(278, 873);
             Sidebar.TabIndex = 0;
@@ -274,6 +274,7 @@
             importants_button.Text = "          Importantes";
             importants_button.TextAlign = ContentAlignment.MiddleLeft;
             importants_button.UseVisualStyleBackColor = false;
+            importants_button.Click += importants_button_Click;
             // 
             // settingsContainer
             // 
@@ -395,7 +396,7 @@
             // 
             // timerSidebar
             // 
-            timerSidebar.Interval = 10;
+            timerSidebar.Interval = 9;
             timerSidebar.Tick += timerSidebar_Tick;
             // 
             // Panel_Principal
@@ -403,9 +404,11 @@
             Panel_Principal.AutoScroll = true;
             Panel_Principal.BackColor = SystemColors.ControlLightLight;
             Panel_Principal.Controls.Add(theme_panel);
-            Panel_Principal.Location = new Point(272, 34);
+            Panel_Principal.Location = new Point(273, 34);
+            Panel_Principal.MaximumSize = new Size(1127, 793);
+            Panel_Principal.MinimumSize = new Size(941, 793);
             Panel_Principal.Name = "Panel_Principal";
-            Panel_Principal.Size = new Size(946, 793);
+            Panel_Principal.Size = new Size(978, 793);
             Panel_Principal.TabIndex = 1;
             Panel_Principal.Paint += Panel_Principal_Paint;
             // 
@@ -558,7 +561,6 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "NoteApp";
             StartPosition = FormStartPosition.CenterScreen;
-            Load += NoteApp_Load;
             Paint += NoteApp_Paint;
             Sidebar.ResumeLayout(false);
             panel1.ResumeLayout(false);

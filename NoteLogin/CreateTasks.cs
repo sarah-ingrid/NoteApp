@@ -7,16 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace NoteLogin
 {
     public partial class CreateTasks : UserControl
     {
         public event Action TarefaSalva;
+        private int UserID;
 
-        public CreateTasks()
+        public CreateTasks(int UserID)
         {
             InitializeComponent();
+            this.UserID = UserID;
         }
 
         private void tbox_tasks_KeyDown(object sender, KeyEventArgs e)
@@ -26,7 +29,7 @@ namespace NoteLogin
 
                 Tasks novaTarefa = new Tasks()
                 {
-                    ID_user = 1,
+                    ID_user = UserID,
                     description = tbox_tasks.Text.Trim(),
                     //    IsCompleted = false,
                     //    IsImportant = false,

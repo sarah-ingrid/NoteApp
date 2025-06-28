@@ -16,6 +16,7 @@ namespace NoteLogin
 
         public static void CriarNota(Note NovaNota)
         {
+            int IDNote = NovaNota.ID_note;
             int userID = NovaNota.ID_user;
             string titulo = NovaNota.Title;
             string texto = NovaNota.Text;
@@ -26,7 +27,7 @@ namespace NoteLogin
 
             using var conexao = DataBase.ConexaoBanco();
             {
-                string InsertQuery = "INSERT INTO tb_notes(TITULO, TEXTO, IsImportant, CreateAt, UpdateAt, ID_Users)" +
+                string InsertQuery = "INSERT INTO tb_notes( TITULO, TEXTO, IsImportant, CreateAt, UpdateAt, ID_Users)" +
                     "VALUES (@titulo, @texto, @IsImportant, @CreateAt, @UpdateAt, @userID)";
 
                 using (var comando = new SQLiteCommand(InsertQuery, conexao))
@@ -38,8 +39,9 @@ namespace NoteLogin
                     comando.Parameters.AddWithValue("@CreateAt", CreateAt);
                     comando.Parameters.AddWithValue("@UpdateAt", UpdateAt);
 
-                    
                     comando.ExecuteNonQuery();
+
+                    NovaNota.ID_note = (int)(long)new SQLiteCommand("SELECT last_insert_rowid()", conexao).ExecuteScalar();
                 }
             }
 

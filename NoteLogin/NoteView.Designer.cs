@@ -31,7 +31,9 @@
             lblmessage = new Label();
             lbltitle = new Label();
             panelContainer = new Panel();
+            IsImportant = new PictureBox();
             panelContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)IsImportant).BeginInit();
             SuspendLayout();
             // 
             // lblmessage
@@ -56,12 +58,25 @@
             // panelContainer
             // 
             panelContainer.BackColor = Color.WhiteSmoke;
+            panelContainer.Controls.Add(IsImportant);
             panelContainer.Controls.Add(lbltitle);
             panelContainer.Controls.Add(lblmessage);
             panelContainer.Location = new Point(0, 0);
             panelContainer.Name = "panelContainer";
             panelContainer.Size = new Size(925, 94);
             panelContainer.TabIndex = 2;
+            // 
+            // IsImportant
+            // 
+            IsImportant.Cursor = Cursors.Hand;
+            IsImportant.Image = Properties.Resources.star_empty;
+            IsImportant.Location = new Point(869, 5);
+            IsImportant.Name = "IsImportant";
+            IsImportant.Size = new Size(38, 32);
+            IsImportant.SizeMode = PictureBoxSizeMode.StretchImage;
+            IsImportant.TabIndex = 2;
+            IsImportant.TabStop = false;
+            IsImportant.Click += IsImportant_Click;
             // 
             // NoteView
             // 
@@ -72,6 +87,7 @@
             Name = "NoteView";
             Size = new Size(925, 93);
             panelContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)IsImportant).EndInit();
             ResumeLayout(false);
         }
 
@@ -79,5 +95,6 @@
         private Label lbltitle;
         private Label lblmessage;
         public Panel panelContainer;
+        public PictureBox IsImportant;
     }
 }

@@ -8,11 +8,11 @@ namespace NoteLogin
 {
     internal class Note
     {
-        public int ID_note { get; }
+        public int ID_note { get; set; }
         public string Title { get; set; }
         public string Text { get; set; }
-    //    public string ContentRichTextF { get; set;  }
-        public bool IsImportant { get; set; }
+        //    public string ContentRichTextF { get; set;  }
+        public bool IsImportant { get; set; }// = false;
         public DateTime CreateAt { get; set; }
         public DateTime UpdateAt { get; set; }
 
