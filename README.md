@@ -19,9 +19,10 @@ O projeto está sendo feito no Visual Studio em linguagem C#.
 <br/> <br/>
 
 ## O que já foi feito até o momento:
-✅ Interface de login e cadastro integrada ao banco de dados (versão inicial) <br/>
-![loginn](https://github.com/user-attachments/assets/1a0b5066-c026-492d-8ec5-500ff00f10f9)
-![cadastro](https://github.com/user-attachments/assets/58cb5639-b9d9-43b3-9054-2d74d1796cd5) <br/> <br/>
+✅ Interface de login e cadastro integrada ao banco de dados (versão atual) <br/>
+![telalogin1](https://github.com/user-attachments/assets/8944d187-d423-4086-96f6-43182f71071f)
+![cadastro1](https://github.com/user-attachments/assets/f686fd94-c12f-44d1-b33b-f87e5ecdd316) <br/> <br/>
+
 ✅ Validação de login (verifica se o usuário existe no banco) e o cadastro salva os dados diretamente no banco de dados <br/>
 ✅ Notas e tarefas do usuário são armazenadas no banco de dados e exibidas quando ele acessa a opção correspondente no menu   <br/>
 ✅ Todas as opções na barra Menu funcionam corretamente <br/>
@@ -36,7 +37,7 @@ O projeto está sendo feito no Visual Studio em linguagem C#.
 
 ---
 ## Video de demonstração:
-https://github.com/user-attachments/assets/41f78e80-f5f7-46a5-b7fe-11ddb3f816ef
+https://github.com/user-attachments/assets/5c194b71-f063-45bc-86e6-308855cd1d54
 
 ---
 <!-- resolução GIF 700 ou 800 -->
