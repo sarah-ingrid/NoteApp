@@ -24,10 +24,14 @@ O projeto está sendo feito no Visual Studio em linguagem C#.
 ![cadastro](https://github.com/user-attachments/assets/58cb5639-b9d9-43b3-9054-2d74d1796cd5) <br/> <br/>
 ✅ Validação de login (verifica se o usuário existe no banco) e o cadastro salva os dados diretamente no banco de dados <br/>
 ✅ Notas e tarefas do usuário são armazenadas no banco de dados e exibidas quando ele acessa a opção correspondente no menu   <br/>
+✅ Todas as opções na barra Menu funcionam corretamente <br/>
+✅ O usuário agora tem acesso a seu perfil e pode alterar sua senha ou foto de perfil <br/>
 ✅ Melhoria da Interface do aplicativo bloco de notas: 
 * Bordas do Form arredondadas
 * Menu deslizante
 * Funcionalidade de seleção de tema pelo usuário
+* O tema escolhido também é salvo no banco de dados de acordo com o ID de usuário, então o app sempre abre com o último tema que o usuário escolheu
+* A foto do usuário aparece na barra Menu
   <br/> 
 
 ---
@@ -40,9 +44,7 @@ https://github.com/user-attachments/assets/41f78e80-f5f7-46a5-b7fe-11ddb3f816ef
 
 
 ## O que ainda será feito:
-⭕ Melhoria na interface das telas Login e Cadastro <br/>
 ⭕ Customização que o usuário pode fazer ao criar uma nota ou checklist <br/>
-⭕ Implementar as funcionalidades de Atualizar e Deletar para notas e tarefas, mantendo a relação com o usuário logado. <br/>
-⭕ Desenvolver as funcionalidades pendentes das opções restantes no menu (Aba de "Importantes" e relacionados ao Perfil) <br/>
-⭕ Incluir a opção do usuário escolher sua foto de perfil <br/>
+⭕ Implementar as funcionalidades de Editar e Deletar para notas e tarefas, mantendo a relação com o usuário logado. <br/>
+⭕ Resolver problemas de interface <br/>
 ⭕ Com projeto pronto, gerar um .exe portátil para facilitar o uso sem necessidade de instalar dependências <br/>

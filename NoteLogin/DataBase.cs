@@ -26,6 +26,21 @@ namespace NoteLogin
 
 
 
+        public void TrashforDelete(string tabela, int IDNote) 
+        {
+            using (var conexao = DataBase.ConexaoBanco()) 
+            {
+                string query = $"DELETE FROM {tabela} WHERE ID_note = @IDNote";
+
+                using (var comando = new SQLiteCommand(query, conexao))
+                {
+                    comando.Parameters.AddWithValue("@IDNote", IDNote);
+
+                    comando.ExecuteNonQuery();
+                }
+            }
+        }
+
         
     }
 }

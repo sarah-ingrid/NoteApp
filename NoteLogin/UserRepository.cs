@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace NoteLogin
 {
@@ -21,12 +23,12 @@ namespace NoteLogin
 
                     using (var comando = new SQLiteCommand(InsertQuerry, conexao))
                     {
-                        if (UsuarioJaExiste(username)) 
+                        if (UsuarioJaExiste(username))
                         {
                             MessageBox.Show("LOGIN JÁ EXISTENTE\n\nPor favor escolha outro", "INVÁLIDO", MessageBoxButtons.OK);
                         }
                         else
-                        comando.Parameters.AddWithValue("@nome", nome);
+                            comando.Parameters.AddWithValue("@nome", nome);
                         comando.Parameters.AddWithValue("@username", username);
                         comando.Parameters.AddWithValue("@email", email);
                         comando.Parameters.AddWithValue("@senha", senha);
@@ -65,7 +67,7 @@ namespace NoteLogin
                     }
                     else
 
-                    return 0;
+                        return 0;
                 }
             }
         }
@@ -83,8 +85,46 @@ namespace NoteLogin
                     return resultado > 0;
                 }
             }
+        }
 
 
+        public void SaveThemeColor(int cor, int User_ID)
+        {
+            using (var conexao = DataBase.ConexaoBanco())
+            {
+                string query = "UPDATE tb_users SET tema_cor = @cor WHERE User_ID = @userId";
+                using (var comando = new SQLiteCommand(query, conexao))
+                {
+                    comando.Parameters.AddWithValue("@cor", cor);
+                    comando.Parameters.AddWithValue("@userId", User_ID);
+                    comando.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+
+
+        public int GetSavedTheme(int UserID)
+        {
+            int themeNumber = 1;
+
+            using (var conexao = DataBase.ConexaoBanco())
+            {
+                string query = "SELECT tema_cor FROM tb_users WHERE User_ID = @userId";
+
+                using (var comando = new SQLiteCommand(query, conexao))
+                {
+                    comando.Parameters.AddWithValue("@userId", UserID);
+                    var resultado = comando.ExecuteScalar();
+
+                    if (resultado != null && resultado != DBNull.Value)
+                        themeNumber = Convert.ToInt32(resultado);
+                    else
+                        themeNumber = 1;
+                }
+            }
+            return themeNumber;
         }
 
     }

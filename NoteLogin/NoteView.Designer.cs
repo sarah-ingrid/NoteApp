@@ -32,8 +32,10 @@
             lbltitle = new Label();
             panelContainer = new Panel();
             IsImportant = new PictureBox();
+            pictureBox1 = new PictureBox();
             panelContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)IsImportant).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // lblmessage
@@ -42,7 +44,7 @@
             lblmessage.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblmessage.Location = new Point(7, 40);
             lblmessage.Name = "lblmessage";
-            lblmessage.Size = new Size(915, 44);
+            lblmessage.Size = new Size(918, 40);
             lblmessage.TabIndex = 1;
             lblmessage.Text = "some message";
             // 
@@ -63,7 +65,7 @@
             panelContainer.Controls.Add(lblmessage);
             panelContainer.Location = new Point(0, 0);
             panelContainer.Name = "panelContainer";
-            panelContainer.Size = new Size(925, 94);
+            panelContainer.Size = new Size(925, 88);
             panelContainer.TabIndex = 2;
             // 
             // IsImportant
@@ -72,22 +74,35 @@
             IsImportant.Image = Properties.Resources.star_empty;
             IsImportant.Location = new Point(869, 5);
             IsImportant.Name = "IsImportant";
-            IsImportant.Size = new Size(38, 32);
+            IsImportant.Size = new Size(35, 32);
             IsImportant.SizeMode = PictureBoxSizeMode.StretchImage;
             IsImportant.TabIndex = 2;
             IsImportant.TabStop = false;
             IsImportant.Click += IsImportant_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.trash;
+            pictureBox1.Location = new Point(896, 87);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(26, 24);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 3;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
             // NoteView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
+            Controls.Add(pictureBox1);
             Controls.Add(panelContainer);
             Name = "NoteView";
-            Size = new Size(925, 93);
+            Size = new Size(925, 111);
             panelContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)IsImportant).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -96,5 +111,6 @@
         private Label lblmessage;
         public Panel panelContainer;
         public PictureBox IsImportant;
+        private PictureBox pictureBox1;
     }
 }

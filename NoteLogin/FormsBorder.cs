@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -53,7 +55,8 @@ namespace NoteLogin
         }
 
         // Formatar a região do formulário e a borda
-        public static void FormRegionAndBorder(Form thisForm, float radius, Graphics graph, Color borderColor, float borderSize)
+        public static void FormRegionAndBorder(Form thisForm, float radius, Graphics graph, 
+                                                Color borderColor, float borderSize, bool setRegionOnly)
         {
             if (thisForm.WindowState != FormWindowState.Minimized)
             {
@@ -61,8 +64,15 @@ namespace NoteLogin
                 using (Pen penBorder = new Pen(borderColor, borderSize))
                 using (Matrix transform = new Matrix())
                 {
+
+                    if (setRegionOnly) // serve para controlar se mexe ou não na região do formulário.
+                    {                   // se false = apenas desenha a borda arredondada na tela e não mexe na região
+                        thisForm.Region = new Region(roundPath);
+                        return; 
+                    }
+
                     graph.SmoothingMode = SmoothingMode.AntiAlias;
-                    thisForm.Region = new Region(roundPath);
+
                     if (borderSize >= 1)
                     {
                         Rectangle rect = thisForm.ClientRectangle;
@@ -175,9 +185,111 @@ namespace NoteLogin
             Rectangle rectBottomRight = new Rectangle(mWidht, rectForm.Y + mHeight, mWidht, mHeight);
             DrawPath(rectBottomRight, graph, borderRadius, fbColors.BottomRightColor);
         }
+    }
 
 
 
+    public class CircularPictureBox : PictureBox
+    {
+        private int borderSize = 2;
+        private Color borderColor = Color.RoyalBlue;
+        private Color borderColor2 = Color.HotPink;
+        private DashStyle borderLineStyle = DashStyle.Solid;
+        private DashCap borderCapStyle = DashCap.Flat;
+        private float gradientAngle = 50F;
 
+        public CircularPictureBox()
+        {
+            this.Size = new Size(100, 100);
+            this.SizeMode = PictureBoxSizeMode.StretchImage;
+        }
+
+        // propriedades
+        [Category("PictureBox Code")]
+        public int BorderSize
+        {
+            get { return borderSize; }
+            set { borderSize = value; this.Invalidate(); }
+        }
+
+        [Category("PictureBox Code")]
+        public DashStyle BorderLineStyle
+        {
+            get { return borderLineStyle; }
+            set { borderLineStyle = value; this.Invalidate(); }
+        }
+
+
+        [Category("PictureBox Code")]
+        public DashCap BorderCapStyle
+        {
+            get { return borderCapStyle; }
+            set { borderCapStyle = value; this.Invalidate(); }
+        }
+
+
+        [Category("PictureBox Code")]
+        public Color BorderColor
+        {
+            get { return borderColor; }
+            set { borderColor = value; this.Invalidate(); }
+        }
+
+
+        [Category("PictureBox Code")]
+        public Color BorderColor2
+        {
+            get { return borderColor2; }
+            set { borderColor2 = value; this.Invalidate(); }
+        }
+
+
+        [Category("PictureBox Code")]
+        public float GradientAngle
+        {
+            get { return gradientAngle; }
+            set { gradientAngle = value; this.Invalidate(); }
+        }
+       
+
+
+        // sobreescrevendo para que seja um círculo perfeito
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            var path = new GraphicsPath();
+            path.AddEllipse(ClientRectangle);
+            this.Region = new Region(path);
+        }
+
+        /* sobreescrever o evento OnPaint para criar a borda aparência personalizada
+         protected override void OnPaint(PaintEventArgs pe)
+         {
+             base.OnPaint(pe); // desenha a imagem normal
+
+             var graph = pe.Graphics;
+             graph.SmoothingMode = SmoothingMode.AntiAlias;
+
+             var rectBorder = Rectangle.Inflate(ClientRectangle, -borderSize / 2, -borderSize / 2);
+
+             using (var borderGColor = new LinearGradientBrush(rectBorder, borderColor, borderColor2, gradientAngle))
+             using (var penBorder = new Pen(borderGColor, borderSize))
+             {
+                 penBorder.DashStyle = borderLineStyle;
+                 penBorder.DashCap = borderCapStyle;
+
+                 graph.DrawEllipse(penBorder, rectBorder);
+             }
+         }*/
+
+        public new Image Image
+        {
+            get => base.Image;
+            set
+            {
+                base.Image = value;
+                this.Invalidate();
+            }
+        }
     }
 }

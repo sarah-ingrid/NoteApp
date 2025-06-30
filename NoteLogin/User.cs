@@ -17,6 +17,9 @@ namespace NoteLogin
         public string Password { get; set; }
         public string Email { get; set; }
         public string Gender { get; set; }
+        public int ThemeColor { get; set; } = 1;
+        public string CaminhoFoto { get; set; }
+        public byte[] foto_perfil { get; set; }
 
         public User(string userName, string password, string email, string login, string gender)
         {

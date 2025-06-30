@@ -22,6 +22,8 @@ namespace NoteLogin
 
         public int IDNote { get; set; }
         public bool Important { get; set; }
+        private bool isTrash;
+        private bool IsInImportantSession { get; set; }
 
         public void UpdateStarImage()
         {
@@ -83,25 +85,47 @@ namespace NoteLogin
             // trocando as imagens
             UpdateStarImage();
 
-            if (!Important)
-            {
-                this.Parent.Controls.Remove(this);
-                this.Dispose();
-            }
-
             using var conexao = DataBase.ConexaoBanco();
             {
                 string UpdateQuery = "UPDATE tb_notes SET IsImportant = @important WHERE ID_note = @id;";
 
-                using (var comando = new SQLiteCommand(UpdateQuery, conexao)) 
+                using (var comando = new SQLiteCommand(UpdateQuery, conexao))
                 {
                     comando.Parameters.AddWithValue("@id", IDNote);
-                    comando.Parameters.AddWithValue("@important", Important? 1 : 0); // sql entende que 1 é importante e 0 não é importante
+                    comando.Parameters.AddWithValue("@important", Important ? 1 : 0); // sql entende que 1 é importante e 0 não é importante
 
                     comando.ExecuteNonQuery();
                 }
             }
 
+            if (IsInImportantSession && !Important)
+            {
+                this.Parent.Controls.Remove(this);
+                this.Dispose();
+            }
+
         }
-    }
+
+        // LIXEIRA FUNCIONA!!!! 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!isTrash && MessageBox.Show("Deseja realmente excluir a nota?", "EXCLUIR NOTA", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    this.Parent.Controls.Remove(this);
+                    this.Dispose();
+                }
+
+                DataBase trash = new DataBase();
+                trash.TrashforDelete("tb_notes", IDNote);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ERRO AO EXCLUIR UMA NOTA" + ex.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }  
+         
+    } 
 }
