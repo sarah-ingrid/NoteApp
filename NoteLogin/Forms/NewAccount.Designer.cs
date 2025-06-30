@@ -177,7 +177,7 @@
             panel1.Controls.Add(user_senha);
             panel1.Controls.Add(label5);
             panel1.Controls.Add(user_login);
-            panel1.Location = new Point(299, 24);
+            panel1.Location = new Point(327, 157);
             panel1.Name = "panel1";
             panel1.Size = new Size(604, 542);
             panel1.TabIndex = 12;
@@ -187,7 +187,7 @@
             AutoScaleMode = AutoScaleMode.None;
             BackgroundImage = Properties.Resources.blue_gradient_background_07xqmk2r9n9vmxli;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1215, 634);
+            ClientSize = new Size(1219, 831);
             Controls.Add(panel1);
             Controls.Add(pictureBox1);
             FormBorderStyle = FormBorderStyle.None;

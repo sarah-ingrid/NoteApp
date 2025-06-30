@@ -118,7 +118,7 @@ namespace NoteLogin
             this.Close();
         }
 
-     /*   protected override CreateParams CreateParams
+        protected override CreateParams CreateParams
         {
             get
             {
@@ -139,18 +139,18 @@ namespace NoteLogin
         private void NoteApp_Activated(object sender, EventArgs e)
         {
             this.Invalidate();
-        }*/
+        }
 
 
 
         private void NewAccount_Load(object sender, EventArgs e)
         {
 
-            /* using (Graphics g = this.CreateGraphics())
+             using (Graphics g = this.CreateGraphics())
              {
                  FormsBorder.FormRegionAndBorder(this, borderRadius, g, borderColor, borderSize, setRegionOnly: true);
              }
-             panel1.BackColor = Color.FromArgb(100, 0, 0, 0);*/
+             panel1.BackColor = Color.FromArgb(100, 0, 0, 0);
 
             panel1.BackColor = Color.FromArgb(100, 0, 0, 0);
         }

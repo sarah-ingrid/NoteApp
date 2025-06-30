@@ -69,7 +69,7 @@
             enter_button.ForeColor = SystemColors.ActiveCaptionText;
             enter_button.Location = new Point(203, 262);
             enter_button.Name = "enter_button";
-            enter_button.Size = new Size(132, 41);
+            enter_button.Size = new Size(132, 50);
             enter_button.TabIndex = 4;
             enter_button.Text = "ENTRAR";
             enter_button.UseVisualStyleBackColor = true;
@@ -102,7 +102,7 @@
             // 
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.Image = Properties.Resources.user_84308;
-            pictureBox1.Location = new Point(30, 125);
+            pictureBox1.Location = new Point(60, 125);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(33, 30);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -113,7 +113,7 @@
             // 
             pictureBox2.BackColor = Color.Transparent;
             pictureBox2.Image = Properties.Resources.password_3715;
-            pictureBox2.Location = new Point(30, 201);
+            pictureBox2.Location = new Point(60, 201);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(33, 30);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;

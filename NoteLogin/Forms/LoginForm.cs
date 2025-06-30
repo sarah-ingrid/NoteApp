@@ -69,7 +69,7 @@ namespace NoteLogin
         }
 
         // Serve para obrescreve parâmetros para melhorar o desempenho do desenho da interface
-     /*   protected override CreateParams CreateParams
+        protected override CreateParams CreateParams
         {
             get
             {
@@ -90,16 +90,16 @@ namespace NoteLogin
         private void NoteApp_Activated(object sender, EventArgs e)
         {
             this.Invalidate();
-        }*/
+        }
 
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
 
-            /* using (Graphics g = this.CreateGraphics())
+             using (Graphics g = this.CreateGraphics())
              {                                                      // Region true = define a região arredondada, não desenha borda 
                  FormsBorder.FormRegionAndBorder(this, borderRadius, g, borderColor, borderSize, setRegionOnly: true);
-             }*/
+             }
 
             center_panel.BackColor = Color.FromArgb(100, 0, 0, 0);
         }
@@ -107,10 +107,10 @@ namespace NoteLogin
         private void LoginForm_Resize(object sender, EventArgs e)
         {
             // o tamanho mudou, o formato arredondado precisa ser recalculado
-           /* using (Graphics g = this.CreateGraphics())
+            using (Graphics g = this.CreateGraphics())
             {
                 FormsBorder.FormRegionAndBorder(this, borderRadius, g, borderColor, borderSize, setRegionOnly: true);
-            }*/
+            }
         }
 
         private void LoginForm_Paint(object sender, PaintEventArgs e)
