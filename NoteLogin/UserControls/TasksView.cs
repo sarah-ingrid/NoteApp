@@ -17,8 +17,15 @@ namespace NoteLogin
             InitializeComponent();
         }
 
+        private int borderRadius = 15;
+
         #region Properties
         private String _message;
+
+        private void TasksView_Load(object sender, EventArgs e)
+        {
+            FormsBorder.SetRegion(this, borderRadius);
+        }
 
         [Category("Custom Props")]
         public string Message

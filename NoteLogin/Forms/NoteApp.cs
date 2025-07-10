@@ -21,14 +21,15 @@ namespace NoteLogin
 
     public partial class NoteApp : Form
     {
-
-        private int UserID;
+      //  public int CurrentIDNote { get; set; } = -1;
+        public int UserID;
 
         public NoteApp(int UserID)
         {
             InitializeComponent();
 
             this.UserID = UserID;
+
 
             FormsBorder.EnabbleDrag(this.borderStylePanel, this);
 
@@ -37,10 +38,11 @@ namespace NoteLogin
 
         private void NoteApp_Load(object sender, EventArgs e)
         {
+            FormsBorder.SetRegion(this, borderRadius);
+
             string nome = "";
             string username = "";
             string picture = "";
-            string genero;
 
             try
             {
@@ -93,6 +95,7 @@ namespace NoteLogin
 
         bool sidebarOpen;
         bool settingsOpen;
+        bool panelEditorOpen = false;
 
         bool IsImportant;
 
@@ -165,18 +168,28 @@ namespace NoteLogin
             new_menu.Show(NewNote, 1, NewNote.Height);
         }
 
+
         private void novaNotaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Panel_Principal.Controls.Count > 0)
+            panelEditorOpen = !panelEditorOpen;
+
+            if (panelEditorOpen)
             {
-                Panel_Principal.Controls.Clear();
+                panel_editor.Visible = true;
+                panel_editor.BringToFront();
+
+                panel_editor.Controls.Add(new Editor());
             }
             else
             {
-                CreateNote criarNovaNota = new CreateNote(UserID);
-                ShowUserControl(criarNovaNota);
+                panel_editor.Visible = false;
+                panel_editor.SendToBack();
             }
+
+
+
         }
+
 
         private void notaTarefaToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -191,17 +204,46 @@ namespace NoteLogin
             }
         }
 
-        private void NoteApp_Paint(object sender, PaintEventArgs e)
+        private void timer_editorPanel_Tick(object sender, EventArgs e)
         {
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            FormsBorder.FormRegionAndBorder(this, borderRadius, e.Graphics, borderColor, borderSize, true);
+
+            /*   if (isOppening)
+               {
+
+                   panel_editor.Width += 10;
+                   panel_editor.Location = new Point(panel_editor.Location.X - 10, panel_editor.Location.Y);
+                   panel_editor.Visible = true;
+                   if (panel_editor.Width >= panel_editor.MaximumSize.Width)
+                   {
+                      // panel_editor.Width = panel_editor.MaximumSize.Width;
+                       panelEditorOpen = true;
+                       timer_editorPanel.Stop();
+                   }
+               }
+               else
+               {
+                   panel_editor.Width -= 10;
+                   panel_editor.Location = new Point(panel_editor.Location.X + 10, panel_editor.Location.Y);
+
+                   if (panel_editor.Width <= panel_editor.MaximumSize.Width)
+                   {
+                       //  panel_editor.Width = panel_editor.MinimumSize.Width;
+                       panel_editor.Visible = false;
+                       panelEditorOpen = false;
+                       timer_editorPanel.Stop();
+                   }
+
+               }*/
 
         }
 
-        // ****************************************** VER AQUI DPS
-        private void Panel_Principal_Paint(object sender, PaintEventArgs e)
+        private void NoteApp_Paint(object sender, PaintEventArgs e)
         {
-            //  FormsBorder.ControlRegionAndBorder(Panel_Principal, borderRadius, e.Graphics, Color.Transparent);
+            /* e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+             FormsBorder.FormRegionAndBorder(this, borderRadius, e.Graphics, borderColor, borderSize, true);*/
+            FormsBorder.DrawBorder(this, borderRadius, e.Graphics, borderColor, borderSize);
+
+
         }
 
 
@@ -231,6 +273,15 @@ namespace NoteLogin
                         note.Message = reader.GetString(2);
                         note.Important = reader.GetBoolean(3);
                         note.UpdateStarImage();
+
+                        note.Click += (s, e) =>
+                        {
+                          //  panel_editor.Visible = true;
+                          //  panel_editor.BringToFront();
+                            CarregarItemNoEditor(note.IDNote, "tb_notes");
+                        };
+
+
                         return note;
                     },
                     temImportancia: true
@@ -274,23 +325,47 @@ namespace NoteLogin
                 Panel_Principal.Controls.Clear();
             }
             else
+
                 CarregarItensNoPainel<NoteView>(
                     UserID,
                     "tb_notes",
                     true,
                     false,
-                    reader =>
-                    {
-                        var note = new NoteView();
-                        note.IDNote = reader.GetInt32(0);
-                        note.Title = reader.GetString(1);
-                        note.Message = reader.GetString(2);
-                        note.Important = reader.GetBoolean(3);
-                        note.UpdateStarImage();
-                        return note;
-                    },
+                    CreateNoteView,
                     temImportancia: true
-                );
+                    );
+
+            /*CarregarItensNoPainel<NoteView>(
+                UserID,
+                "tb_notes",
+                true,
+                false,
+                reader =>
+                {
+                    var note = new NoteView();
+                    note.IDNote = reader.GetInt32(0);
+                    note.Title = reader.GetString(1);
+                    note.Message = reader.GetString(2);
+                    note.Important = reader.GetBoolean(3);
+                    note.UpdateStarImage();
+                    return note;
+                },
+                temImportancia: true
+            );*/
+        }
+
+        private NoteView CreateNoteView(SQLiteDataReader reader)
+        {
+            var note = new NoteView();
+            note.IDNote = reader.GetInt32(0);
+            note.Title = reader.GetString(1);
+            note.Message = reader.GetString(2);
+            note.Important = reader.GetBoolean(3);
+            note.UpdateStarImage();
+
+
+
+            return note;
         }
 
         private void config_button_Click(object sender, EventArgs e)
@@ -354,9 +429,7 @@ namespace NoteLogin
         {
             this.Invalidate();
         }
-        /////                                   /////
 
-        /// //              /
         private void theme_button_Click(object sender, EventArgs e)
         {
             clickColor = !clickColor;
@@ -366,9 +439,17 @@ namespace NoteLogin
 
             if (theme_panel.Visible)
             {
+                if (!Panel_Principal.Controls.Contains(theme_panel))
+                {
+                    Panel_Principal.Controls.Add(theme_panel);
+                }
 
                 theme_panel.BringToFront();
+                theme_panel.Invalidate();
+
             }
+
+            Panel_Principal.Refresh();
 
         }
 
@@ -495,6 +576,21 @@ namespace NoteLogin
             profile.Show();
         }
 
+        private void NoteApp_Resize(object sender, EventArgs e)
+        {
+            FormsBorder.SetRegion(this, borderRadius);
+            this.Invalidate();
+        }
+
+        private void new_menu_Opening(object sender, CancelEventArgs e)
+        {
+             FormsBorder.SetRegion(new_menu, 15);
+        }
+
+
+
+
+
         private void CarregarItensNoPainel<T>(int UserID, string tabela, bool somenteImportantes, bool isTask,
             Func<SQLiteDataReader, T> criarControle, bool temImportancia = false) where T : UserControl
         {
@@ -505,7 +601,7 @@ namespace NoteLogin
                 string query;
 
                 if (isTask)
-                    query = "SELECT TEXTO";
+                    query = "SELECT TEXTO"; // id tasks
 
                 else
                     query = "SELECT ID_note, TITULO, TEXTO";
@@ -532,6 +628,69 @@ namespace NoteLogin
                     }
                 }
             }
+        }
+
+
+        int notaAbertaID = -1;
+
+        public int CurrentIDNote 
+        {
+            get { return notaAbertaID; }
+            set { notaAbertaID = value; }
+        }
+
+
+        public void CarregarItemNoEditor(int idNota, string tabela)
+        {
+            if (panel_editor.Visible && notaAbertaID == idNota)
+            {
+                panel_editor.Controls.Clear();
+                panel_editor.Visible = false;
+                notaAbertaID = -1;
+                return;
+            }
+
+            // Se clicar em outra nota (ou nenhuma aberta -1) abre e carrega ela
+            panel_editor.Visible = true;
+            panel_editor.BringToFront();
+            panel_editor.Controls.Clear();
+
+            using (var conexao = DataBase.ConexaoBanco())
+                {
+                    string query = $"SELECT TITULO, TEXTO FROM {tabela} WHERE ID_note = @id";
+
+                    using (var comando = new SQLiteCommand(query, conexao))
+                    {
+
+                        comando.Parameters.AddWithValue("@id", idNota);
+
+                        using (var reader = comando.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                string titulo = reader.GetString(0);
+                                string texto = reader.GetString(1);
+
+                                Editor editor = new Editor();
+                                editor.IDNote = idNota;
+                                editor.Title = titulo;
+                                editor.Message = texto;
+                                editor.noteApp = this;
+
+
+                            panel_editor.Controls.Clear();
+                                panel_editor.Controls.Add(editor);
+                                editor.Dock = DockStyle.Fill;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Nenhum item encontrado para carregar no editor.");
+                            }
+                        }
+                    }
+                    CurrentIDNote = idNota;
+                }
+            
         }
 
 

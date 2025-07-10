@@ -11,19 +11,25 @@ namespace NoteLogin
 {
     internal class DataBase
     {
-        // 1º: criar a variavel de conexão (do tipo sqlite)
-        private static SQLiteConnection conexao;
 
-// método para fazer essa conexão 
-// dessa forma, em vez de sempre precisar escrever td isso chamaremos apenas o método com td ja escrito e pronto para conectar
+       private static SQLiteConnection conexao;
+
+
+
         public static SQLiteConnection ConexaoBanco()
         {
-            // aqui daremos o CAMINHO de onde está nosso BD:
-            conexao = new SQLiteConnection("Data Source =C:\\Users\\sarah\\Desktop\\C#\\NoteLogin\\NoteLogin\\database\\bd_usuarios");
-            conexao.Open();
-            return conexao;
-        }
+             conexao = new SQLiteConnection(@"Data Source=C:\Users\sarah\Desktop\Projetos\NoteLogin\NoteLogin\database\bd_noteApp.db");
+             conexao.Open();
+             return conexao;
 
+           /* string basePath = AppDomain.CurrentDomain.BaseDirectory;
+            string dbPath = Path.Combine(basePath, "database", "bd_noteApp.db");
+            string conexao = $"Data Source={dbPath};";
+
+            return new SQLiteConnection(conexao);*/
+
+            
+        }
 
 
         public void TrashforDelete(string tabela, int IDNote) 

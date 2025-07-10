@@ -12,7 +12,7 @@ namespace NoteLogin
         public string Title { get; set; }
         public string Text { get; set; }
         //    public string ContentRichTextF { get; set;  }
-        public bool IsImportant { get; set; }// = false;
+        public int IsImportant { get; set; }// = false;
         public DateTime CreateAt { get; set; }
         public DateTime UpdateAt { get; set; }
 

@@ -20,7 +20,7 @@ namespace NoteLogin
             int userID = NovaNota.ID_user;
             string titulo = NovaNota.Title;
             string texto = NovaNota.Text;
-            bool IsImportant = NovaNota.IsImportant;
+            int IsImportant = NovaNota.IsImportant;
             DateTime CreateAt = DateTime.Now;
             DateTime UpdateAt = DateTime.Now;
 
@@ -47,9 +47,37 @@ namespace NoteLogin
 
         }
 
+        public static void AtualizarNota(Note NotaAtt)
+        {
+            int IDNote = NotaAtt.ID_note;
+            string titulo = NotaAtt.Title;
+            string texto = NotaAtt.Text;
+            int IsImportant = NotaAtt.IsImportant;
+            DateTime CreateAt = DateTime.Now;
+            DateTime UpdateAt = DateTime.Now;
 
 
+            using (var conexao = DataBase.ConexaoBanco())
+            {
+                string UpdateQuery = "UPDATE tb_notes SET TITULO = @titulo, TEXTO = @texto, IsImportant = @isImportant, " +
+                                      "UpdateAt = @updateAt WHERE ID_note = @idNota";
 
+                using (var comando = new SQLiteCommand(UpdateQuery, conexao))
+                {
+                    comando.Parameters.AddWithValue("@titulo", NotaAtt.Title);
+                    comando.Parameters.AddWithValue("@texto", NotaAtt.Text);
+                    comando.Parameters.AddWithValue("@isImportant", NotaAtt.IsImportant);
+                    comando.Parameters.AddWithValue("@updateAt", DateTime.Now); 
+                    comando.Parameters.AddWithValue("@idNota", NotaAtt.ID_note); 
+                    comando.ExecuteNonQuery();
+
+                 //   NotaAtt.ID_note = (int)(long)new SQLiteCommand("SELECT last_insert_rowid()", conexao).ExecuteScalar();
+                }
+            }
         }
     }
+
+
+}
+  
 

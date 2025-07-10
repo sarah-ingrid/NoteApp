@@ -13,7 +13,7 @@ namespace NoteLogin
 {
     public partial class CreateTasks : UserControl
     {
-        public event Action TarefaSalva;
+       // public event Action TarefaSalva;
         private int UserID;
 
         public CreateTasks(int UserID)

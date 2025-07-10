@@ -74,6 +74,7 @@
             Controls.Add(panel1);
             Name = "TasksView";
             Size = new Size(934, 84);
+            Load += TasksView_Load;
             panel1.ResumeLayout(false);
             ResumeLayout(false);
         }

@@ -72,6 +72,8 @@
             new_menu = new ContextMenuStrip(components);
             novaNotaToolStripMenuItem = new ToolStripMenuItem();
             notaTarefaToolStripMenuItem = new ToolStripMenuItem();
+            panel_editor = new Panel();
+            timer_editorPanel = new System.Windows.Forms.Timer(components);
             Sidebar.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)menu_box).BeginInit();
@@ -165,9 +167,9 @@
             panel_inicio.Controls.Add(profilepicture);
             panel_inicio.Controls.Add(welcomeUser_label);
             panel_inicio.Controls.Add(loginUser_label);
-            panel_inicio.Location = new Point(9, 3);
+            panel_inicio.Location = new Point(0, 3);
             panel_inicio.Name = "panel_inicio";
-            panel_inicio.Size = new Size(266, 110);
+            panel_inicio.Size = new Size(275, 110);
             panel_inicio.TabIndex = 1;
             // 
             // opcaoSair
@@ -233,14 +235,14 @@
             // 
             notes_button.BackColor = Color.Plum;
             notes_button.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            notes_button.Image = Properties.Resources.note_1200602;
+            notes_button.Image = Properties.Resources.noteImage;
             notes_button.ImageAlign = ContentAlignment.MiddleLeft;
-            notes_button.Location = new Point(0, -28);
+            notes_button.Location = new Point(-5, -27);
             notes_button.Name = "notes_button";
             notes_button.Padding = new Padding(30, 0, 0, 0);
-            notes_button.Size = new Size(278, 112);
+            notes_button.Size = new Size(288, 112);
             notes_button.TabIndex = 2;
-            notes_button.Text = "             Notas";
+            notes_button.Text = "              Notas";
             notes_button.TextAlign = ContentAlignment.MiddleLeft;
             notes_button.UseVisualStyleBackColor = false;
             notes_button.Click += notes_button_Click;
@@ -262,7 +264,7 @@
             tasks_button.Location = new Point(0, -28);
             tasks_button.Name = "tasks_button";
             tasks_button.Padding = new Padding(30, 0, 0, 0);
-            tasks_button.Size = new Size(278, 112);
+            tasks_button.Size = new Size(300, 112);
             tasks_button.TabIndex = 2;
             tasks_button.Text = "             Tarefas";
             tasks_button.TextAlign = ContentAlignment.MiddleLeft;
@@ -378,7 +380,7 @@
             button_profile.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button_profile.Image = (Image)resources.GetObject("button_profile.Image");
             button_profile.ImageAlign = ContentAlignment.MiddleLeft;
-            button_profile.Location = new Point(-6, -28);
+            button_profile.Location = new Point(0, -28);
             button_profile.Name = "button_profile";
             button_profile.Padding = new Padding(30, 0, 0, 0);
             button_profile.Size = new Size(284, 112);
@@ -424,11 +426,10 @@
             Panel_Principal.Controls.Add(theme_panel);
             Panel_Principal.Location = new Point(273, 34);
             Panel_Principal.MaximumSize = new Size(1127, 793);
-            Panel_Principal.MinimumSize = new Size(941, 793);
+            Panel_Principal.MinimumSize = new Size(936, 793);
             Panel_Principal.Name = "Panel_Principal";
-            Panel_Principal.Size = new Size(946, 793);
+            Panel_Principal.Size = new Size(936, 793);
             Panel_Principal.TabIndex = 1;
-            Panel_Principal.Paint += Panel_Principal_Paint;
             // 
             // theme_panel
             // 
@@ -551,6 +552,7 @@
             new_menu.Items.AddRange(new ToolStripItem[] { novaNotaToolStripMenuItem, notaTarefaToolStripMenuItem });
             new_menu.Name = "contextMenuStrip1";
             new_menu.Size = new Size(156, 52);
+            new_menu.Opening += new_menu_Opening;
             // 
             // novaNotaToolStripMenuItem
             // 
@@ -566,6 +568,22 @@
             notaTarefaToolStripMenuItem.Text = "Nota Tarefa";
             notaTarefaToolStripMenuItem.Click += notaTarefaToolStripMenuItem_Click;
             // 
+            // panel_editor
+            // 
+            panel_editor.BackColor = SystemColors.ActiveCaption;
+            panel_editor.Location = new Point(899, 34);
+            panel_editor.MaximumSize = new Size(320, 813);
+            panel_editor.MinimumSize = new Size(10, 793);
+            panel_editor.Name = "panel_editor";
+            panel_editor.Size = new Size(320, 793);
+            panel_editor.TabIndex = 1;
+            panel_editor.Visible = false;
+            // 
+            // timer_editorPanel
+            // 
+            timer_editorPanel.Interval = 10;
+            timer_editorPanel.Tick += timer_editorPanel_Tick;
+            // 
             // NoteApp
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -573,6 +591,7 @@
             BackColor = SystemColors.ButtonHighlight;
             ClientSize = new Size(1219, 831);
             ControlBox = false;
+            Controls.Add(panel_editor);
             Controls.Add(borderStylePanel);
             Controls.Add(Panel_Principal);
             Controls.Add(Sidebar);
@@ -582,6 +601,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Load += NoteApp_Load;
             Paint += NoteApp_Paint;
+            Resize += NoteApp_Resize;
             Sidebar.ResumeLayout(false);
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)menu_box).EndInit();
@@ -657,5 +677,7 @@
         private PictureBox purple_theme;
         internal CircularPictureBox profilepicture;
         private Panel panel_inicio;
+        private System.Windows.Forms.Timer timer_editorPanel;
+        internal Panel panel_editor;
     }
 }

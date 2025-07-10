@@ -45,7 +45,7 @@ namespace NoteLogin
                         ID_user = UserID,
                         Title = notaTitulo,
                         Text = nota,
-                        IsImportant = false, //
+                        IsImportant = 0, //
                         CreateAt = DateTime.Now,
                         UpdateAt = DateTime.Now
                     };

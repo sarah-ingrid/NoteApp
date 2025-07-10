@@ -93,9 +93,19 @@ namespace NoteLogin.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Captura_de_tela_2025_05_10_215359 {
+        internal static System.Drawing.Bitmap bold_text {
             get {
-                object obj = ResourceManager.GetObject("Captura de tela 2025-05-10 215359", resourceCulture);
+                object obj = ResourceManager.GetObject("bold-text", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cancel {
+            get {
+                object obj = ResourceManager.GetObject("cancel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -106,6 +116,36 @@ namespace NoteLogin.Properties {
         internal static System.Drawing.Bitmap default_picture_profile {
             get {
                 object obj = ResourceManager.GetObject("default_picture_profile", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap eye_closed {
+            get {
+                object obj = ResourceManager.GetObject("eye_closed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap eye_open {
+            get {
+                object obj = ResourceManager.GetObject("eye_open", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap italic_text {
+            get {
+                object obj = ResourceManager.GetObject("italic-text", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -131,31 +171,20 @@ namespace NoteLogin.Properties {
         }
         
         /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a .
         /// </summary>
-        internal static System.Drawing.Bitmap note_120060 {
+        internal static string note_120060 {
             get {
-                object obj = ResourceManager.GetObject("note_120060", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ResourceManager.GetString("note_120060", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap note_1200601 {
+        internal static System.Drawing.Bitmap noteImage {
             get {
-                object obj = ResourceManager.GetObject("note_1200601", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap note_1200602 {
-            get {
-                object obj = ResourceManager.GetObject("note_1200602", resourceCulture);
+                object obj = ResourceManager.GetObject("noteImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -216,6 +245,16 @@ namespace NoteLogin.Properties {
         internal static System.Drawing.Bitmap trash {
             get {
                 object obj = ResourceManager.GetObject("trash", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap underline_text {
+            get {
+                object obj = ResourceManager.GetObject("underline-text", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

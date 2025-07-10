@@ -15,11 +15,12 @@ namespace NoteLogin
         {
             try
             {
+                Image foto = Properties.Resources.default_picture_profile;
 
                 using var conexao = DataBase.ConexaoBanco();
                 {
-                    string InsertQuerry = "INSERT INTO tb_users(T_NOME, T_username, T_EMAIL, T_SENHA, T_genero) " +
-                            "VALUES (@nome, @username, @email, @senha, @genero)";
+                    string InsertQuerry = "INSERT INTO tb_users(T_NOME, T_username, T_EMAIL, T_SENHA, T_genero, FOTO_PERFIL) " +
+                            "VALUES (@nome, @username, @email, @senha, @genero, @foto)";
 
                     using (var comando = new SQLiteCommand(InsertQuerry, conexao))
                     {
@@ -28,11 +29,12 @@ namespace NoteLogin
                             MessageBox.Show("LOGIN JÁ EXISTENTE\n\nPor favor escolha outro", "INVÁLIDO", MessageBoxButtons.OK);
                         }
                         else
-                            comando.Parameters.AddWithValue("@nome", nome);
+                        comando.Parameters.AddWithValue("@nome", nome);
                         comando.Parameters.AddWithValue("@username", username);
                         comando.Parameters.AddWithValue("@email", email);
                         comando.Parameters.AddWithValue("@senha", senha);
                         comando.Parameters.AddWithValue("@genero", genero);
+                        comando.Parameters.AddWithValue("@foto", foto);
 
                         comando.ExecuteNonQuery();
                     }
@@ -43,6 +45,7 @@ namespace NoteLogin
             catch (Exception ex)
             {
                 return false;
+                MessageBox.Show("Erro ao cadastrar usuário: " + ex.Message);
 
             }
         }
@@ -63,7 +66,10 @@ namespace NoteLogin
 
                     if (resultado != null && resultado != DBNull.Value)
                     {
-                        return Convert.ToInt32(resultado);
+                        int id = Convert.ToInt32(resultado);
+
+                        Sessao.IDUsuarioLogado = id;
+                        return id;
                     }
                     else
 
@@ -127,5 +133,11 @@ namespace NoteLogin
             return themeNumber;
         }
 
+    }
+
+
+    public static class Sessao
+    {
+        public static int IDUsuarioLogado { get; set; }
     }
 }

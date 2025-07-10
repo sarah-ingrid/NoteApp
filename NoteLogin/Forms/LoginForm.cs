@@ -8,16 +8,15 @@ namespace NoteLogin
         public LoginForm()
         {
             InitializeComponent();
+
             DoubleBuffered = true;
 
             FormsBorder.EnabbleDrag(this, this);
         }
 
-        private int borderRadius = 20;
-        private int borderSize = 0;
-        private Color borderColor = Color.FromArgb(255, 255, 255);
+        private int borderRadiusForm = 20;
+        private int borderRadiusControl = 15;
 
-        private int IDusuario_logado = 0;
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -26,13 +25,13 @@ namespace NoteLogin
 
         private void enter_button_Click(object sender, EventArgs e)
         {
-            // int loginValido = UserRepository.VerificarLogin(login_box.Text, password_box.Text);
             int userID = UserRepository.VerificarLogin(login_box.Text, password_box.Text);
 
             try
             {
                 if (userID != 0)
                 {
+                    Sessao.IDUsuarioLogado = userID;
                     var noteApp = new NoteApp(userID);
                     this.Hide();
                     noteApp.ShowDialog();
@@ -74,7 +73,7 @@ namespace NoteLogin
             get
             {
                 CreateParams cp = base.CreateParams;
-                cp.Style |= 0x20000;
+                cp.ExStyle |= 0x02000000;
                 return cp;
             }
         }
@@ -95,32 +94,40 @@ namespace NoteLogin
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
-
-             using (Graphics g = this.CreateGraphics())
-             {                                                      // Region true = define a região arredondada, não desenha borda 
-                 FormsBorder.FormRegionAndBorder(this, borderRadius, g, borderColor, borderSize, setRegionOnly: true);
-             }
-
-            center_panel.BackColor = Color.FromArgb(100, 0, 0, 0);
+            FormsBorder.SetRegion(enter_button, borderRadiusControl);
+            FormsBorder.SetRegion(newAccount_button, borderRadiusControl);
         }
 
         private void LoginForm_Resize(object sender, EventArgs e)
         {
-            // o tamanho mudou, o formato arredondado precisa ser recalculado
-            using (Graphics g = this.CreateGraphics())
-            {
-                FormsBorder.FormRegionAndBorder(this, borderRadius, g, borderColor, borderSize, setRegionOnly: true);
-            }
+            FormsBorder.SetRegion(this, borderRadiusForm);
+            this.Invalidate();
         }
 
-        private void LoginForm_Paint(object sender, PaintEventArgs e)
-        {                                                              // Region false = desenha a borda arredondada no form
-           // FormsBorder.FormRegionAndBorder(this, borderRadius, e.Graphics, borderColor, borderSize, setRegionOnly: false);
+
+        bool eyePasswordChar = false;
+        private void passwordEye_Click(object sender, EventArgs e)
+        {
+            eyePasswordChar = !eyePasswordChar;
+
+            if (eyePasswordChar)
+            {
+                passwordEye.Image = Properties.Resources.eye_open;
+                password_box.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                passwordEye.Image = Properties.Resources.eye_closed;
+                password_box.UseSystemPasswordChar = true;
+            }
+
         }
 
         private void LoginForm_Shown(object sender, EventArgs e)
         {
-           // center_panel.Visible = true;
+            FormsBorder.SetRegion(this, borderRadiusForm);
+            center_panel.BackColor = Color.FromArgb(100, 0, 0, 0); 
+
         }
     }
 }

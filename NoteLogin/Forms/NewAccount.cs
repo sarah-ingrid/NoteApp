@@ -23,9 +23,10 @@ namespace NoteLogin
             FormsBorder.EnabbleDrag(this, this);
         }
 
-        private int borderRadius = 20;
-        private int borderSize = 0;
-        private Color borderColor = Color.FromArgb(255, 255, 255);
+        private int borderRadiusForm = 20;
+        private int borderRadiusControl = 15;
+        private float borderSizeForm = 0;
+        private Color borderColorForm = Color.FromArgb(255, 255, 255);
 
 
         private string ObterGeneroSelecionado()
@@ -54,7 +55,6 @@ namespace NoteLogin
             }
             return genero;
         }
-        ////////////////////////////
 
         private void registerButton_Click(object sender, EventArgs e)
         {
@@ -83,8 +83,13 @@ namespace NoteLogin
                     }
                     else
                     {
-                        this.Close();
+                        foreach (Control c in panel1.Controls)
+                        {
+                            if (c is TextBox)
+                                ((TextBox)c).Clear();
+                        }
 
+                        box_gender.SelectedIndex = -1;
                     }
                 }
 
@@ -99,7 +104,6 @@ namespace NoteLogin
 
         private void user_login_Enter(object sender, EventArgs e)
         {
-            //user_login.Text = "";
             user_login.BackColor = Color.LightGray;
         }
 
@@ -108,7 +112,7 @@ namespace NoteLogin
             user_login.BackColor = Color.White;
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e) // voltar para tela de login
+        private void back_login_Click(object sender, EventArgs e)
         {
             LoginForm telaLogin = new();
 
@@ -123,7 +127,7 @@ namespace NoteLogin
             get
             {
                 CreateParams cp = base.CreateParams;
-                cp.Style |= 0x20000;
+                cp.ExStyle |= 0x02000000;
                 return cp;
             }
         }
@@ -146,32 +150,42 @@ namespace NoteLogin
         private void NewAccount_Load(object sender, EventArgs e)
         {
 
-             using (Graphics g = this.CreateGraphics())
-             {
-                 FormsBorder.FormRegionAndBorder(this, borderRadius, g, borderColor, borderSize, setRegionOnly: true);
-             }
-             panel1.BackColor = Color.FromArgb(100, 0, 0, 0);
+            FormsBorder.SetRegion(this, borderRadiusForm);
+            FormsBorder.SetRegion(registerButton, borderRadiusControl);
 
             panel1.BackColor = Color.FromArgb(100, 0, 0, 0);
+
+            panel1.Invalidate();
         }
 
         private void NewAccount_Resize(object sender, EventArgs e)
         {
 
-          /*  using (Graphics g = this.CreateGraphics())
-            {
-                FormsBorder.FormRegionAndBorder(this, borderRadius, g, borderColor, borderSize, setRegionOnly: true);
-            }*/
+            FormsBorder.SetRegion(this, borderRadiusForm);
+            this.Invalidate();
         }
 
         private void NewAccount_Paint(object sender, PaintEventArgs e)
         {
-           // FormsBorder.FormRegionAndBorder(this, borderRadius, e.Graphics, borderColor, borderSize, setRegionOnly: false);
+            FormsBorder.DrawBorder(this, borderRadiusForm, e.Graphics, borderColorForm, borderSizeForm);
         }
 
-        private void NewAccount_Shown(object sender, EventArgs e)
+        bool eyePasswordChar = false;
+        private void passwordEye_Click(object sender, EventArgs e)
         {
-           // panel1.Visible = true;
+            eyePasswordChar = !eyePasswordChar;
+
+            if (eyePasswordChar)
+            {
+                passwordEye.Image = Properties.Resources.eye_open;
+                user_senha.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                passwordEye.Image = Properties.Resources.eye_closed;
+                user_senha.UseSystemPasswordChar = true;
+            }
+
         }
     }
 }
