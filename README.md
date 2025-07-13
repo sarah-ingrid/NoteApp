@@ -44,8 +44,16 @@ O projeto está sendo feito no Visual Studio em linguagem C#.
   <br/> 
 
 ---
-## Video de demonstração:
-https://github.com/user-attachments/assets/5c194b71-f063-45bc-86e6-308855cd1d54
+## Video de demonstração <br/>
+
+### Design e Funcionalidades Visuais:
+https://github.com/user-attachments/assets/5c194b71-f063-45bc-86e6-308855cd1d54 
+
+<br/> <br/>
+
+### Formatação com RichTextBox:
+https://github.com/user-attachments/assets/fdc0b983-03fa-4490-86d6-87bf934530e8
+
 
 ---
 <!-- resolução GIF 700 ou 800 -->
@@ -53,5 +61,5 @@ https://github.com/user-attachments/assets/5c194b71-f063-45bc-86e6-308855cd1d54
 
 
 ## O que ainda será feito:
-⭕ Coisas de segurança como: opção "esqueceu a senha?", limpeza da seção quando o usuário deslogar e validação de e-mail. <br/>
+⭕ Recursos de segurança como: opção "esqueceu a senha?", limpeza da seção quando o usuário deslogar e validação de e-mail. <br/>
 ⭕ Com projeto pronto, gerar um .exe portátil para facilitar o uso sem necessidade de instalar dependências <br/>
