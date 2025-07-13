@@ -14,7 +14,10 @@ Este é um projeto pessoal de um aplicativo para criar Anotações ou Tarefas, j
 - E no futuro, estilização e funcionalidades extras na interface.
 
 Apesar de ser um aplicativo simples, o planejei com o objetivo de aprender o máximo possível, combinando várias tecnologias e conceitos em um único projeto. 
-O projeto está sendo feito no Visual Studio em linguagem C#.
+O projeto está sendo feito no Visual Studio em linguagem C#.  <br/>
+
+❗❗ Optei pelo SQLite porque no início pensei em transformar o projeto em um executável para facilitar o uso. Sistemas que eu estava acostumada como SQL Server e MySQL exigem que o usuário tenha o banco instalado na máquina, o que tornaria o processo mais complexo. <br/> 
+Já o SQLite funciona como um "banco de dados de bolso", pois fica embutido no próprio executável, o que é ideal para aplicações simples, portáteis e de fácil distribuição.
 
 <br/> <br/>
 
