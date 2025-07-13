@@ -10,7 +10,7 @@ namespace NoteLogin
     internal class TasksRepository
     {
 
-        public static void CriarTarefa(Tasks NovaTarefa)
+        public static int CriarTarefa(Tasks NovaTarefa)
         {
             int userID = NovaTarefa.ID_user;
         //    string titulo = NovaTarefa.Title;
@@ -34,6 +34,8 @@ namespace NoteLogin
                     comando.Parameters.AddWithValue("@UpdateAt", UpdateAt);
 
                     comando.ExecuteNonQuery();
+
+                    return (int)conexao.LastInsertRowId;
                 }
             }
 

@@ -11,7 +11,7 @@ namespace NoteLogin
         public int id_tasks { get; }
         public string Title { get; set; }
         public string description { get; set; }
-   //     public bool IsCompleted { get; set; }
+        public int IsCompleted { get; set; }
         public DateTime DATE { get; set; }
         public DateTime CreateAt { get; set; }
         public DateTime UpdateAt { get; set; }

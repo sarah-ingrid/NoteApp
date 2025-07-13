@@ -27,12 +27,20 @@ O projeto está sendo feito no Visual Studio em linguagem C#.
 ✅ Notas e tarefas do usuário são armazenadas no banco de dados e exibidas quando ele acessa a opção correspondente no menu   <br/>
 ✅ Todas as opções na barra Menu funcionam corretamente <br/>
 ✅ O usuário agora tem acesso a seu perfil e pode alterar sua senha ou foto de perfil <br/>
+✅ CRUD completo implementado <br/>
 ✅ Melhoria da Interface do aplicativo bloco de notas: 
 * Bordas do Form arredondadas
 * Menu deslizante
 * Funcionalidade de seleção de tema pelo usuário
 * O tema escolhido também é salvo no banco de dados de acordo com o ID de usuário, então o app sempre abre com o último tema que o usuário escolheu
-* A foto do usuário aparece na barra Menu
+* A foto do usuário aparece na barra Menu <br/>
+
+✅ Edição avançada no bloco de notas com RichTextBox:
+* Negrito, itálico e sublinhado aplicáveis ao texto selecionado
+* Aumento e diminuição do tamanho da fonte
+* Mudança de cor da fonte e marca-texto com escolha personalizada via paleta de cores
+* Suporte ao atalho Ctrl+Z para desfazer alterações
+* Interface intuitiva com botões funcionais simulando os recursos do Word
   <br/> 
 
 ---
@@ -45,7 +53,5 @@ https://github.com/user-attachments/assets/5c194b71-f063-45bc-86e6-308855cd1d54
 
 
 ## O que ainda será feito:
-⭕ Customização que o usuário pode fazer ao criar uma nota ou checklist <br/>
-⭕ Implementar as funcionalidades de Editar e Deletar para notas e tarefas, mantendo a relação com o usuário logado. <br/>
-⭕ Resolver problemas de interface <br/>
+⭕ Coisas de segurança como: opção "esqueceu a senha?", limpeza da seção quando o usuário deslogar e validação de e-mail. <br/>
 ⭕ Com projeto pronto, gerar um .exe portátil para facilitar o uso sem necessidade de instalar dependências <br/>

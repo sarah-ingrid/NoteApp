@@ -29,20 +29,34 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            checkbox = new PictureBox();
             lblTaskMessage = new Label();
-            checkBox = new CheckBox();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)checkbox).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.LightCyan;
+            panel1.Controls.Add(checkbox);
             panel1.Controls.Add(lblTaskMessage);
-            panel1.Controls.Add(checkBox);
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(934, 84);
             panel1.TabIndex = 0;
+            // 
+            // checkbox
+            // 
+            checkbox.Image = Properties.Resources.Unchecked;
+            checkbox.Location = new Point(13, 29);
+            checkbox.Name = "checkbox";
+            checkbox.Size = new Size(31, 30);
+            checkbox.SizeMode = PictureBoxSizeMode.StretchImage;
+            checkbox.TabIndex = 3;
+            checkbox.TabStop = false;
+            checkbox.Click += checkbox_Click;
+            checkbox.MouseEnter += checkbox_MouseEnter;
+            checkbox.MouseLeave += checkbox_MouseLeave;
             // 
             // lblTaskMessage
             // 
@@ -55,18 +69,6 @@
             lblTaskMessage.TabIndex = 2;
             lblTaskMessage.Text = "some tasks";
             // 
-            // checkBox
-            // 
-            checkBox.BackColor = SystemColors.ButtonHighlight;
-            checkBox.Cursor = Cursors.Help;
-            checkBox.FlatStyle = FlatStyle.System;
-            checkBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            checkBox.Location = new Point(18, 30);
-            checkBox.Name = "checkBox";
-            checkBox.Size = new Size(22, 23);
-            checkBox.TabIndex = 1;
-            checkBox.UseVisualStyleBackColor = false;
-            // 
             // TasksView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -76,13 +78,14 @@
             Size = new Size(934, 84);
             Load += TasksView_Load;
             panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)checkbox).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private Panel panel1;
-        private CheckBox checkBox;
         private Label lblTaskMessage;
+        private PictureBox checkbox;
     }
 }

@@ -61,23 +61,22 @@ namespace NoteLogin
             }
         }
 
+
+        bool isBold;
         private void bold_option_Click(object sender, EventArgs e)
         {
-            richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Bold);
+            ChangeFontStyle(FontStyle.Bold);
         }
 
         private void italic_option_Click(object sender, EventArgs e)
         {
-            richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Italic);
+            ChangeFontStyle(FontStyle.Italic);
         }
 
         private void underline_option_Click(object sender, EventArgs e)
         {
-            richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Underline);
+            ChangeFontStyle(FontStyle.Underline);
         }
-
-
-
 
 
 
@@ -116,7 +115,7 @@ namespace NoteLogin
                         MessageBox.Show("Nota salva com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     }
-                    else 
+                    else
                     {
                         novaNota.CreateAt = DateTime.Now;
                         NoteRepository.CriarNota(novaNota);
@@ -134,7 +133,7 @@ namespace NoteLogin
 
                     if (noteApp != null)
                     {
-                       // noteApp.AtualizarListaDeNotas(); // Chame seu método para recarregar os itens no Panel_Principal
+                        // noteApp.AtualizarListaDeNotas(); // Chame seu método para recarregar os itens no Panel_Principal
 
                         noteApp.CurrentIDNote = -1;
                     }
@@ -193,17 +192,89 @@ namespace NoteLogin
 
         private void closeButton_Click(object sender, EventArgs e)
         {
-           // this.Parent.Controls.Remove(this);
-           // noteApp.panel_editor.Visible = false;
+            // this.Parent.Controls.Remove(this);
+            // noteApp.panel_editor.Visible = false;
         }
 
 
+        private void ChangeFontStyle(FontStyle styleToToggle)
+        {
+            var currentFont = richTextBox.SelectionFont;
+            if (currentFont == null) return;
 
+            FontStyle newStyle;
+
+            if (currentFont.Style.HasFlag(styleToToggle))
+                newStyle = currentFont.Style & ~styleToToggle;
+            else
+                newStyle = currentFont.Style | styleToToggle;
+
+            richTextBox.SelectionFont = new Font(currentFont.FontFamily, currentFont.Size, newStyle);
+        }
 
 
         #region Properties
         private String _title;
         private String _message;
+
+        private void fontStyle_Click(object sender, EventArgs e)
+        {
+            FontDialog font = new FontDialog();
+
+            if (font.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox.SelectionFont = font.Font;
+            }
+        }
+
+        private void fontSizeIncrease_Click(object sender, EventArgs e)
+        {
+            var font = richTextBox.SelectionFont;
+            if (font == null) return;
+
+            float newSize = font.Size + 2;
+
+            richTextBox.SelectionFont = new Font(font.FontFamily, newSize, font.Style);
+        }
+
+        private void fontSizeDecrease_Click(object sender, EventArgs e)
+        {
+            var font = richTextBox.SelectionFont;
+            if (font == null) return;
+
+            float newSize = font.Size - 2;
+
+            richTextBox.SelectionFont = new Font(font.FontFamily, newSize, font.Style);
+        }
+
+        private void UndoButton_Click(object sender, EventArgs e)
+        {
+            if (richTextBox.CanUndo)
+                richTextBox.Undo();
+        }
+
+        private void fontColor_Click(object sender, EventArgs e)
+        {
+            using (ColorDialog colorDialog = new ColorDialog())
+            {
+                if (colorDialog.ShowDialog() == DialogResult.OK)
+                {
+                    richTextBox.SelectionColor = colorDialog.Color;
+                }
+            }
+        }
+
+        private void fontBackColor_Click(object sender, EventArgs e)
+        {
+            using (ColorDialog colorDialog = new ColorDialog())
+            {
+                if (colorDialog.ShowDialog() == DialogResult.OK)
+                {
+                    richTextBox.SelectionBackColor = colorDialog.Color;
+                }
+            }
+        }
+
 
 
         [Category("Custom Props for Editor")]

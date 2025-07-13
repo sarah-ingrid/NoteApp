@@ -31,13 +31,15 @@ namespace NoteLogin
                 {
                     ID_user = UserID,
                     description = tbox_tasks.Text.Trim(),
-                    //    IsCompleted = false,
-                    //    IsImportant = false,
+                    IsCompleted = 0,
                     CreateAt = DateTime.Now,
                     UpdateAt = DateTime.Now
                 };
 
-                TasksRepository.CriarTarefa(novaTarefa);
+                int IDTasks = TasksRepository.CriarTarefa(novaTarefa);
+
+                var taskVisual = new TasksView();
+                taskVisual.SetTaskData(IDTasks, novaTarefa.description, false);
 
                 MessageBox.Show("Nota salva com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

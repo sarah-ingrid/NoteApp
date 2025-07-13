@@ -21,7 +21,6 @@ namespace NoteLogin
 
     public partial class NoteApp : Form
     {
-      //  public int CurrentIDNote { get; set; } = -1;
         public int UserID;
 
         public NoteApp(int UserID)
@@ -632,11 +631,17 @@ namespace NoteLogin
 
 
         int notaAbertaID = -1;
+        int taskAbertaID = -1;
 
         public int CurrentIDNote 
         {
             get { return notaAbertaID; }
             set { notaAbertaID = value; }
+        }
+        public int CurrentTaskID
+        {
+            get { return taskAbertaID; }
+            set { taskAbertaID = value; }
         }
 
 

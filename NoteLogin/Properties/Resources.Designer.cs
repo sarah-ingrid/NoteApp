@@ -113,6 +113,16 @@ namespace NoteLogin.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Checked {
+            get {
+                object obj = ResourceManager.GetObject("Checked", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap default_picture_profile {
             get {
                 object obj = ResourceManager.GetObject("default_picture_profile", resourceCulture);
@@ -136,6 +146,46 @@ namespace NoteLogin.Properties {
         internal static System.Drawing.Bitmap eye_open {
             get {
                 object obj = ResourceManager.GetObject("eye_open", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap font_color {
+            get {
+                object obj = ResourceManager.GetObject("font_color", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap font_symbol {
+            get {
+                object obj = ResourceManager.GetObject("font-symbol", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fontsize {
+            get {
+                object obj = ResourceManager.GetObject("fontsize", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap highlight {
+            get {
+                object obj = ResourceManager.GetObject("highlight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -222,6 +272,26 @@ namespace NoteLogin.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap size_decrease {
+            get {
+                object obj = ResourceManager.GetObject("size_decrease", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap size_increase {
+            get {
+                object obj = ResourceManager.GetObject("size_increase", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap star_empty {
             get {
                 object obj = ResourceManager.GetObject("star_empty", resourceCulture);
@@ -252,9 +322,29 @@ namespace NoteLogin.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Unchecked {
+            get {
+                object obj = ResourceManager.GetObject("Unchecked", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap underline_text {
             get {
                 object obj = ResourceManager.GetObject("underline-text", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap undo_arrow {
+            get {
+                object obj = ResourceManager.GetObject("undo_arrow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
